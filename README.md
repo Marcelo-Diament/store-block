@@ -194,3 +194,53 @@ const [count, setCount] = useState(0)
 ```
 _where count retains the current value, setCount is the method to update its state, and 0 is the initial value._
 
+So, blending all the steps until now, we have:
+```ts
+// Imports
+import React, { useState } from 'react'
+import { TimeSplit } from './typings/global'
+import { tick } from './utils/time'
+
+// CountdownProps interface whith targetDate prop with string type definition
+interface CountdownProps {
+  targetDate: string
+}
+
+// Default target date
+const DEFAULT_TARGET_DATE = (new Date('2020-12-31')).toISOString()
+// The Countdown (with the optional targetDate param and the time remaining update function)
+const Countdown: StorefrontFunctionComponent<CountdownProps> = ({ targetDate = DEFAULT_TARGET_DATE }) => {
+  const [timeRemaining, setTime] = useState<TimeSplit>({
+    hours: '00', 
+    minutes: '00', 
+    seconds: '00'
+  })
+
+  tick(targetDate, setTime)
+  
+  return (
+    <div>
+      <h1>{ `${timeRemaining.hours}:${timeRemaining.minutes}:${timeRemaining.seconds}` }</h1>
+    </div>
+  )
+}
+
+// Countdown Schema (that allows user to define its value)
+Countdown.schema = {
+  title: 'editor.countdown.title',
+  description: 'editor.countdown.description',
+  type: 'object',
+  properties: {
+    targetDate: {
+      title: 'Final date',
+      description: 'Final date used in the countdown',
+      type: 'string',
+      default: null
+    }
+  }
+}
+
+export default Countdown
+
+```
+
