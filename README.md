@@ -390,7 +390,87 @@ Countdown.schema = {
   },
 }
 ```
-Now we can check translation in action by adding the following query parameter: `/?cultureInfo=es-ar` or `/?cultureInfo=pt-br`.
+
+Now we can check translation in action by adding the following query parameter: `/?cultureInfo=es-ar` or `/?cultureInfo=pt-br` .
 
 ___
 
+## 7. Componentizing the countdown block
+
+### Componentization
+
+Since there are two main elements in our component (the countdown itself and its title), in order to achieve a more flexible layout, we can split it in two components - the countdown and the title. So our new component (title), needs its own interface.
+
+### Interface
+
+As in OOP, a interface defines a contract, with well-defined restrictions on how the blocks will work together. Using interfaces enhances our customization power.
+
+To define a app in the interface, the component property is responsible to define the React component to be used. So it is important that the component name to be the same as the file name inside the `react/` folder. Take a loook on this example ( `interfaces.json` ):
+
+``` tsx
+{
+  "countdown": {
+    "component": "Countdown"
+  }
+}
+```
+
+### Adding a new component
+
+The process is the same we just did with Countdown component. But, here is a resume of the process:
+
+1. **Create the component file** (first letter must be uppercase) in the `react/` folder.
+2. Import React from 'react' and other **necessary imports**.
+3. Define the **component interface**.
+4. Define **CSS handles** const.
+5. Define the **component function**
+6. **Export default Component**
+
+So, for our Title component, we've got the following code ( `react/Title.tsx` ):
+
+``` tsx
+import React from "react"
+import { FormattedMessage } from "react-intl"
+import { useCssHandles } from "vtex.css-handles"
+
+interface TitleProps {
+    title: string
+}
+
+const CSS_HANDLES = ["title"] as const
+
+const Title: StorefrontFunctionComponent<TitleProps> = ({ title }) => {
+    const handles = useCssHandles(CSS_HANDLES)
+    const titleText = title || <FormattedMessage id="countdown.title" />
+
+    return (
+        <div className={ `${handles.title} t-heading-2 fw3 w-100 c-muted-1 db tc` }>
+            {titleText}
+        </div>
+    )
+}
+
+Title.schema = {
+    title: "editor.countdown-title.title",
+    description: "editor.countdown-title.description",
+    type: "object",
+    properties: {
+        title: {
+            title: "I am a title",
+            type: "string",
+            default: null,
+        },
+    },
+}
+
+export default Title
+```
+
+### Updating interfaces.json
+All you have to do is to add your component to the JSON file (`./store/interfaces.json`).
+
+### Component internationalization
+Update each language file (`./messages/en.json`, `./messages/es.json`, and `./messages/pt.json`).
+
+### Adding the new block to store home
+Just add the component (`countdown.title` in our lesson) in the blocks property of `./store-theme/store/blocks/home/home.jsonc`.
