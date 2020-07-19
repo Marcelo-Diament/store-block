@@ -62,10 +62,10 @@ ___
 
 ## manifest.json
 
-**vendor**: name of VTEX account (responsible for the app development) - use VTEX as the vendor to use native apps.
-**name**: name of the app (only lowercase chars and hyphens (-).
-**version**: X.x.x - major (breaking changes), minor (backward compatible new features), and patch (backward compatible bugfixes), specs at [semver.org](https://semver.org/).
-**dependencies**: list of dependencies for the correct functioning of the app.
+- **vendor**: name of VTEX account (responsible for the app development) - use VTEX as the vendor to use native apps.
+- **name**: name of the app (only lowercase chars and hyphens (-).
+- **version**: X.x.x - major (breaking changes), minor (backward compatible new features), and patch (backward compatible bugfixes), specs at [semver.org](https://semver.org/).
+- **dependencies**: list of dependencies for the correct functioning of the app.
 
 Example:
 
@@ -194,6 +194,7 @@ const [count, setCount] = useState(0)
 ```
 _where count retains the current value, setCount is the method to update its state, and 0 is the initial value._
 
+## Countdown feature - step by step
 So, blending all the steps until now, we have:
 ```ts
 // Imports
@@ -244,3 +245,8 @@ export default Countdown
 
 ```
 
+# 5. Countdown feature
+
+## the useState React's hook
+
+First o
