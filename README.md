@@ -335,9 +335,10 @@ We must also define our const with its value:
 ``` tsx
 const titleText = title || <FormattedMessage id="countdown.title" />
 ```
+
 At last, we must render it. So we'll define it as a prop and include an outer container:
 
-```tsx
+``` tsx
 const Countdown: StorefrontFunctionComponent<CountdownProps> = ({
   title,
   targetDate,
@@ -354,12 +355,42 @@ const Countdown: StorefrontFunctionComponent<CountdownProps> = ({
   tick(targetDate, setTime)
 
   return (
-    <div className={`${handles.container} t-heading-2 fw3 w-100 c-muted-1`}>
-      <div className={`${handles.title} db tc`}>{titleText}</div>
-      <div className={`${handles.countdown} db tc`}>
-        {`${timeRemaining.hours}:${timeRemaining.minutes}:${timeRemaining.seconds}`}
+    <div className={ `${handles.container} t-heading-2 fw3 w-100 c-muted-1` }>
+      <div className={ `${handles.title} db tc` }>{titleText}</div>
+      <div className={ `${handles.countdown} db tc` }>
+        { `${timeRemaining.hours}:${timeRemaining.minutes}:${timeRemaining.seconds}` }
       </div>
     </div>
   )
 }
 ```
+
+Observe that when we include new CSS Handles we must declare them in the CSS_HANDLES array.
+Also, once we're using a new prop, we must added it to the app schema.
+
+Example:
+
+``` tsx
+Countdown.schema = {
+  title: 'editor.countdown.title',
+  description: 'editor.countdown.description',
+  type: 'object',
+  properties: {
+   title: {
+    title: 'I am a title',
+    type: 'string',
+    default: null,
+  },
+    targetDate: {
+      title: 'Final date',
+      description: 'Final date used in the countdown',
+      type: 'string',
+      default: null,
+    },
+  },
+}
+```
+Now we can check translation in action by adding the following query parameter: `/?cultureInfo=es-ar` or `/?cultureInfo=pt-br`.
+
+___
+
