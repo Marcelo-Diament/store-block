@@ -75,3 +75,7 @@ Example:
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-a pi/master/gen/manifest.schema"
 }
 ```
+
+### TIP
+To continue the store-block course, you just need to close the issu. ;)
+
