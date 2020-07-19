@@ -1,6 +1,6 @@
-# Store Block course template
+# Store Block Course
 
-Here you'll learn how to create awesome Store Framework blocks!
+A step by step guide to understanding Store Block by implementing a Countdown block.
 
 ### TIP
 
@@ -24,7 +24,7 @@ or, for Mac users:
 yarn global add vtex
 ```
 
-Check if it was correctly installed by typing vtex-v (Windows) or vtex (Mac).
+Check if it was correctly installed by typing `vtex-v` (Windows) or `vtex` (Mac).
 
 ### 2. Log in
 
@@ -100,18 +100,18 @@ ___
 
 ### About React.js and StoreBlock
 
-In order to develop a store front block it is necessary to do it using React.js.
+In order to develop a store front block, it is necessary to use React.js.
 According to VTEX, the usage should be focused on Hook API instead of using a class definition to components building.
 In VTEX IO, the front end programming default language is **TypeScript**.
 
 ###  App linking
 
-You must declare the new app at the theme's manifest.json file (within dependencies property).
-And also, you must add your apps block at the desired .jsonc file.
+You must declare the new app at the theme's `manifest.json` file (within dependencies property).
+And also, you must add your apps block at the desired `.jsonc` file.
 
 ### App usage
 
-It is necessary to have at least two terminals opened and running `vtex link` , one for the theme and another for the custom block.
+It is necessary to have at least two terminals opened and running `vtex link`, one for the theme and another for the custom block.
 
 ### App unlinking
 
@@ -175,7 +175,7 @@ const Countdown: StorefrontFunctionComponent<CountdownProps> = ({ targetDate }) 
 }
 ```
 
-**TIP:** access the [Site Editor](yourworkspace--appliancetheme.myvtex.com/admin/cms/site-editor) (don't forget to change `yourworkspace--appliancetheme` by you own values).
+**TIP:** access the [Site Editor](yourworkspace--appliancetheme.myvtex.com/admin/cms/site-editor) to define values (don't forget to change `yourworkspace--appliancetheme` by you own values).
 
 ___
 
@@ -200,7 +200,7 @@ _where count retains the current value, setCount is the method to update its sta
 
 ### Countdown feature - step by step
 
-So, blending all the steps until now, we have:
+So, combining all the steps until now, we have:
 
 ``` tsx
 // Imports
@@ -272,7 +272,7 @@ With useCSSHandles imported, we must define the CSS Handles:
 const CSS_HANDLES = ["countdown"]
 ```
 
-_In this case we'll just declare the countdown handle._
+_In this case, we'll just declare the countdown handle._
 
 So we use the useCSSHandle component to define the countdown handle:
 
@@ -291,7 +291,7 @@ Finally, we must set the className as an attribute of the HTML tag:
 ### Tachyons
 
 **Tachyons** is a functional CSS framework, which does not have 'pre-built' UI components.
-Its main concept is to 'explode' our style in minor and reusable parts ([Subatomic Design System](https://daneden.me/blog/2018/subatomic-design-systems/)).
+Its main concept is to 'explode' the style in minor and reusable parts ([Subatomic Design System](https://daneden.me/blog/2018/subatomic-design-systems/)).
 It is possible to change Tachyons' definitions by adding a JSON file in the `styles/config` folder.
 
 ___
@@ -307,9 +307,9 @@ But not all the text (for each language) must be translated by you. Let's learn 
 
 Messages hold all the translation services responsibilities. There is a flow in which each text translation will be checked on user-defined context, then in-app translations, and, finally, through the automatic translation system.
 
-Its configuration files are placed in the `./messages` folder. Within this folder, there are three main files: `pt.json` , `en.json` , and `es.json` . To avoid ambiguities, there is the `context.json` file - it is a JSON file where the message is the key and its translation is the value.
+Its configuration files are placed in the `./messages` folder. Within this folder, there are three main files: `pt.json`, `en.json`, and `es.json`. To avoid ambiguities, there is the `context.json` file - it is a JSON file where the message is the key and its translation is the value.
 
-The Messages feature requires the [react-intl lib](https://github.com/formatjs/formatjs) (it is suggested to check the libs documentation out). Add the lib by running this command on the terminal:
+The Messages feature requires the [react-intl lib](https://github.com/formatjs/formatjs) (it is suggested to check the documentation of the libs out). Add the lib by running this command on the terminal:
 
 ``` sh
 yarn add react-intl
@@ -366,7 +366,7 @@ const Countdown: StorefrontFunctionComponent<CountdownProps> = ({
 ```
 
 Observe that when we include new CSS Handles we must declare them in the CSS_HANDLES array.
-Also, once we're using a new prop, we must added it to the app schema.
+Also, once we're using a new prop, we must add it to the app schema.
 
 Example:
 
@@ -391,7 +391,7 @@ Countdown.schema = {
 }
 ```
 
-Now we can check translation in action by adding the following query parameter: `/?cultureInfo=es-ar` or `/?cultureInfo=pt-br` .
+Now we can check translation in action by adding the following query parameter: `/?cultureInfo=es-ar` or `/?cultureInfo=pt-br`.
 
 ___
 
@@ -399,13 +399,13 @@ ___
 
 ### Componentization
 
-Since there are two main elements in our component (the countdown itself and its title), in order to achieve a more flexible layout, we can split it in two components - the countdown and the title. So our new component (title), needs its own interface.
+Since there are two main elements in our component (the countdown itself and its title), in order to achieve a more flexible layout, we can split it into two components - the countdown and the title. So our new component (title), needs its own interface.
 
 ### Interface
 
-As in OOP, a interface defines a contract, with well-defined restrictions on how the blocks will work together. Using interfaces enhances our customization power.
+As in OOP, an interface defines a contract, with well-defined restrictions on how the blocks will work together. Using interfaces enhances our customization power.
 
-To define a app in the interface, the component property is responsible to define the React component to be used. So it is important that the component name to be the same as the file name inside the `react/` folder. Take a loook on this example ( `interfaces.json` ):
+To define an app in the interface, the component property is responsible to define the React component to be used. So it is important that the component name be the same as the file name inside the `react/` folder. Take a look at this example ( `interfaces.json` ):
 
 ``` tsx
 {
@@ -419,7 +419,7 @@ To define a app in the interface, the component property is responsible to defin
 
 The process is the same we just did with Countdown component. But, here is a resume of the process:
 
-1. **Create the component file** (first letter must be uppercase) in the `react/` folder.
+1. **Create the component file** (the first letter must be uppercase) in the `react/` folder.
 2. Import React from 'react' and other **necessary imports**.
 3. Define the **component interface**.
 4. Define **CSS handles** const.
@@ -476,7 +476,7 @@ Update each language file ( `./messages/en.json` , `./messages/es.json` , and `.
 
 ### Adding the new block to store home
 
-Just add the component ( `countdown.title` in our lesson) in the blocks property of `./store-theme/store/blocks/home/home.jsonc` .
+Just add the component ( `countdown.title` in our lesson) in the block's property of `./store-theme/store/blocks/home/home.jsonc` .
 
 ___
 
@@ -484,15 +484,15 @@ ___
 
 ### Introduction
 
-VTEX IO uses [GraphQL](https://graphql.org/) to data transfer processes. To make the GraphQL API integration easier, we'll use **Apollo Client**, a state management lib that offers native React integration through hooks. The `react-apollo` integration is already decleared in `package.json` .
+VTEX IO uses [GraphQL](https://graphql.org/) to data transfer processes. To make the GraphQL API integration easier, we'll use **Apollo Client**, a state management lib that offers native React integration through hooks. The `react-apollo` integration is already declared in `package.json` .
 
 ### Adding countdown component to product page
 
-In this practice we'll modify our Countdown component to search for the targetDate of the releaseDate field of a VTEX product.
+In this practice, we'll modify our Countdown component to search for the targetDate of the releaseDate field of a VTEX product.
 
 Basically, we'll add the countdown component to `./store-theme/store/blocks/product.jsonc` (right before the `buy-button` ).
 
-After doing this preparation, lets start our GraphQL queries.
+After doing this preparation, let's start our GraphQL queries.
 
 ### Realease Date Query
 
@@ -571,10 +571,14 @@ if (error) {
 
 ### Passing releaseDate to tick function
 
-Finally, we can remove the components props and add the releaseDate in tick function:
+Finally, we can remove the component's props and add the releaseDate in tick function:
 
 ``` tsx
 tick(data?.product?.releaseDate || DEFAULT_TARGET_DATE, setTime)
 ```
 
 _Note that the question mark makes property 'optional' - in cases where there is no such prop, undefined will be returned._
+
+And that's all for today!
+
+_#JahBless_
