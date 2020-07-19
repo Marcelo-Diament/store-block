@@ -8,8 +8,8 @@ Here you'll learn how to create awesome Store Framework blocks!
 
 ### 1. Presets
 Make sure you have an IDE installed as well as Git.
-Also check if you have Node.js installed (and Yarn if you're using Mac) as well as the VTEX toolbelt.
-For installing the toolbelf run:
+Also, check if you have Node.js installed (and Yarn if you're using Mac) as well as the VTEX toolbelt.
+For installing the toolbelt run:
 ```
 npm i -g vtex
 ```
@@ -88,12 +88,15 @@ ___
 
 ### About React.js and StoreBlocks
 In order to develop a store front block it is necessary to do it using React.js.
-According to VTEX, the usage should be focused in Hook API instead of using class definition to components building.
+According to VTEX, the usage should be focused on Hook API instead of using a class definition to components building.
 In VTEX IO, the front end programming default language is **TypeScript**.
 
 ###  App linking
-You must declare the new app at the themes manifest.json file (within dependencies property).
+You must declare the new app at the theme's manifest.json file (within dependencies property).
 And also, you must add your apps block at the desired .jsonc file.
 
 ### App usage
 It is necessary to have at least two terminals opened and running `vtex link`, one for the theme and another for the custom block.
+
+### App unlinking
+Use `vtex unlink` to unline the theme. To unlink the app, use `vtex unlin vtex.countdown@0.0.1` with the declaring the specifics app's name and version.
