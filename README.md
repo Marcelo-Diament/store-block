@@ -245,8 +245,35 @@ export default Countdown
 
 ```
 
-# 5. Countdown feature
+# 5. Countdown configurable style
 
-## the useState React's hook
+## CSS Handles
+Allows to use CSS class to customize the store's components (through `vtex.css-handles` app).
+It is possible to create flexible layouts by using CSS handles names on elements HTML.
 
-First o
+To import CSS Handles just include this code snippet on your component .tsx file:
+```ts
+import { useCssHandles } from "vtex.css-handles"
+```
+
+With useCSSHandles imported, we must define the CSS Handles:
+```ts
+const CSS_HANDLES = ["countdown"]
+```
+_In this case we'll just declare the countdown handle._
+
+So we use the useCSSHandle component to define the countdown handle:
+```ts
+const handles = useCssHandles(CSS_HANDLES)
+```
+Finally, we must set the className as an attribute of the HTML tag:
+```ts
+<div className={`${handles.countdown}`}>
+  Content
+</div>
+```
+
+## Tachyons
+**Tachyons** is a functional CSS framework, which does not have 'pre-built' UI components.
+Its main concept is to 'explode' our style in minor and reusable parts ([Subatomic Design System](https://daneden.me/blog/2018/subatomic-design-systems/)).
+It is possible to change Tachyons' definitions by adding a JSON file in the `styles/config` folder.
