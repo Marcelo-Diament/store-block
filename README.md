@@ -41,6 +41,9 @@ _A workspace name must contain only letters and numbers._
 ### 4. Access
 To access your workspace, use this link: https://{workspace}--{account}.myvtex.com.
 
+___
+
+
 ## 1. Introduction
 
 ### manifest.json
@@ -78,4 +81,19 @@ Example:
 
 ### TIP
 To continue the store-block course, you just need to close the issu. ;)
+___
 
+
+## 2. App linking and usage
+
+### About React.js and StoreBlocks
+In order to develop a store front block it is necessary to do it using React.js.
+According to VTEX, the usage should be focused in Hook API instead of using class definition to components building.
+In VTEX IO, the front end programming default language is **TypeScript**.
+
+###  App linking
+You must declare the new app at the themes manifest.json file (within dependencies property).
+And also, you must add your apps block at the desired .jsonc file.
+
+### App usage
+It is necessary to have at least two terminals opened and running `vtex link`, one for the theme and another for the custom block.
