@@ -174,3 +174,23 @@ const Countdown: StorefrontFunctionComponent<CountdownProps> = ({ targetDate }) 
 ```
 
 **TIP:** access the [Site Editor](yourworkspace--appliancetheme.myvtex.com/admin/cms/site-editor) (don't forget to change `yourworkspace--appliancetheme` by you own values).
+
+__
+
+# 4. Countdown feature
+
+## the useState React's hook
+
+First of all, it is necessary to import this hook, by declaring:
+```ts
+import React, { useState } from 'react'
+```
+
+It is used to update or consume the component's **state** (which represents its current state).
+This hook returns a pair - the current state and a function used to update it.
+
+```ts
+const [count, setCount] = useState(0)
+```
+_where count retains the current value, setCount is the method to update its state, and 0 is the initial value._
+
