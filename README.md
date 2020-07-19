@@ -80,7 +80,7 @@ Example:
 ```
 
 ### TIP
-To continue the store-block course, you just need to close the issu. ;)
+To continue the store-block course lessons, you just need to close the issue. ;)
 ___
 
 
