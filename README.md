@@ -467,10 +467,114 @@ export default Title
 ```
 
 ### Updating interfaces.json
-All you have to do is to add your component to the JSON file (`./store/interfaces.json`).
+
+All you have to do is to add your component to the JSON file ( `./store/interfaces.json` ).
 
 ### Component internationalization
-Update each language file (`./messages/en.json`, `./messages/es.json`, and `./messages/pt.json`).
+
+Update each language file ( `./messages/en.json` , `./messages/es.json` , and `./messages/pt.json` ).
 
 ### Adding the new block to store home
-Just add the component (`countdown.title` in our lesson) in the blocks property of `./store-theme/store/blocks/home/home.jsonc`.
+
+Just add the component ( `countdown.title` in our lesson) in the blocks property of `./store-theme/store/blocks/home/home.jsonc` .
+
+___
+
+## 8. Connecting back end and front end
+
+### Introduction
+
+VTEX IO uses [GraphQL](https://graphql.org/) to data transfer processes. To make the GraphQL API integration easier, we'll use **Apollo Client**, a state management lib that offers native React integration through hooks. The `react-apollo` integration is already decleared in `package.json` .
+
+### Adding countdown component to product page
+
+In this practice we'll modify our Countdown component to search for the targetDate of the releaseDate field of a VTEX product.
+
+Basically, we'll add the countdown component to `./store-theme/store/blocks/product.jsonc` (right before the `buy-button` ).
+
+After doing this preparation, lets start our GraphQL queries.
+
+### Realease Date Query
+
+We'll store the query in a new file: `./react/querires/productReleaseDate.graphql` .
+
+In this example, the query will receive the product slug as the term. Then, the resolver `product` will be called and will retrieve the specified field(s).
+
+``` graphql
+query productReleaseDate($slug: String){
+	  product(slug: $slug) {
+		    releaseDate
+	  }
+}
+```
+
+The `product` resolver is already available through the `vtex.search-graphql` app.
+
+Now we need to declare our dependencies in theme's `manifest.json` :
+
+``` json
+"dependencies": {
+  "vtex.styleguide": "9.x",
+  "vtex.css-handles": "0.x",
+  "vtex.search-graphql": "0.x",
+  "vtex.product-context": "0.x"
+}
+```
+
+And we also need to import the `useQuery` , `useProduct` hooks - as well as our `productReleaseDate` query. So our `Countdown.tsx` file imports will be like this:
+
+``` tsx
+import React, { useState } from 'react'
+import { TimeSplit } from './typings/global'
+import { tick } from './utils/time'
+import { useCssHandles } from 'vtex.css-handles'
+import { useQuery } from 'react-apollo'
+import useProduct from 'vtex.product-context/useProduct'
+import productReleaseDate from './queries/productReleaseDate.graphql'
+```
+
+> It is important to higlight that there is the possibility of your IDE showing an error while importing product-context.
+
+### Defining the query
+
+We can define the query using the productReleaseDate imported and the useQuery hook, like this:
+
+``` tsx
+const { product: { linkText } } = useProduct()
+
+const { data, loading, error } = useQuery(productReleaseDate, {
+  variables: {
+    slug: linkText
+  },
+  ssr: false
+})
+```
+
+We must deal with cases in which there is no data (error) or before receiving the return (loading):
+
+``` tsx
+if (loading) {
+  return (
+    <div>
+      <span>Loading...</span>
+    </div>
+  )
+}
+if (error) {
+  return (
+    <div>
+      <span>Error!</span>
+    </div>
+  )
+}
+```
+
+### Passing releaseDate to tick function
+
+Finally, we can remove the components props and add the releaseDate in tick function:
+
+``` tsx
+tick(data?.product?.releaseDate || DEFAULT_TARGET_DATE, setTime)
+```
+
+_Note that the question mark makes property 'optional' - in cases where there is no such prop, undefined will be returned._
